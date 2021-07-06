@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Getter
 @ToString
 @Entity
-@Table(name="UserDetails")
+@Table(name="user")
 public class User {
 
     @Id
@@ -27,10 +27,17 @@ public class User {
 
     private String password;
 
+    //Unidirectional Many To One Mapping
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="current_class_id",referencedColumnName = "current_class_id")
+    private CurrentClass currentClass;
+
+    //Constructor To Create User From RegisterDto
     public User(RegisterDto registerDto) {
         this.name = registerDto.getName();
         this.email = registerDto.getEmail();
         this.password = registerDto.getPassword();
+        this.currentClass=new CurrentClass(registerDto.getCurrentClassDto());
     }
 }
 
