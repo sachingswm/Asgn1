@@ -1,6 +1,7 @@
 package com.example.registerapi.dto;
 
 import com.example.registerapi.exception.InvalidUserDetailsException;
+import com.example.registerapi.helper.HelperClass;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class RegisterDto {
     @NotBlank(message = PASSWORD_MANDATORY)
     @Size(min=10,message=PASSWORD_SIZE)
     private String password;
+    @NotNull
     private CurrentClassDto currentClassDto;
 
 
@@ -37,10 +39,8 @@ public class RegisterDto {
         this.password = password;
     }
 
-    //Setter to set CurrClassDto with validation
-    public void setCurrClassDto(CurrentClassDto currentClassDto)  throws InvalidUserDetailsException {
-        this.currentClassDto=currentClassDto;
+    public void setCurrentClassDto(CurrentClassDto currentClassDto)throws InvalidUserDetailsException {
+        HelperClass.validationOfCurrClassDto(currentClassDto);
+        this.currentClassDto = currentClassDto;
     }
-
-
 }
