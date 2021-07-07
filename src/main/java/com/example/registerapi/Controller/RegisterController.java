@@ -1,6 +1,7 @@
 package com.example.registerapi.Controller;
 
 import com.example.registerapi.Service.RegisterServiceImpl;
+import com.example.registerapi.constant.EndPoints;
 import com.example.registerapi.constant.ErrorMessage;
 import com.example.registerapi.dto.RegisterDto;
 import com.example.registerapi.exception.InvalidUserDetailsException;
@@ -19,7 +20,7 @@ public class RegisterController {
     @Autowired
     private RegisterServiceImpl registerServiceImpl;
 
-    @PostMapping("/register")
+    @PostMapping(EndPoints.POST_REGISTER)
     public String register(@Valid @RequestBody RegisterDto registerDto) throws InvalidUserDetailsException {
         if(!registerServiceImpl.validEmail(registerDto.getEmail()))
             throw new InvalidUserDetailsException(EMAIL_ALREADY_EXISTS);

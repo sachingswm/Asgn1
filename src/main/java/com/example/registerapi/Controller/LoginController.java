@@ -1,6 +1,7 @@
 package com.example.registerapi.Controller;
 
 import com.example.registerapi.Service.LoginServiceImpl;
+import com.example.registerapi.constant.EndPoints;
 import com.example.registerapi.constant.ErrorMessage;
 import com.example.registerapi.dto.LoginDto;
 import com.example.registerapi.exception.InvalidUserDetailsException;
@@ -18,7 +19,7 @@ public class LoginController {
     private LoginServiceImpl authenticationService;
 
     //Login Request
-    @PostMapping("/login")
+    @PostMapping(EndPoints.POST_LOGIN)
     public String login(@RequestBody LoginDto loginDto) throws InvalidUserDetailsException {
         //Check for authentication
         if(!authenticationService.isAuthenticated(loginDto))
