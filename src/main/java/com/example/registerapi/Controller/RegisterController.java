@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.registerapi.entities.User;
 import javax.validation.Valid;
 
+import static com.example.registerapi.constant.EndPoints.POST_REGISTER;
 import static com.example.registerapi.constant.ErrorMessage.EMAIL_ALREADY_EXISTS;
 
 @RestController
@@ -20,7 +21,7 @@ public class RegisterController {
     @Autowired
     private RegisterServiceImpl registerServiceImpl;
 
-    @PostMapping(EndPoints.POST_REGISTER)
+    @PostMapping(POST_REGISTER)
     public String register(@Valid @RequestBody RegisterDto registerDto) throws InvalidUserDetailsException {
         if(!registerServiceImpl.validEmail(registerDto.getEmail()))
             throw new InvalidUserDetailsException(EMAIL_ALREADY_EXISTS);
